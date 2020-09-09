@@ -15,11 +15,11 @@ steps:
   
 # This step pushes the image to Container Registry
 
-- name: 'gcr.io/cloud-builders/docker'
-  id: Push
-  args:
-  - 'push'
-  - 'gcr.io/$PROJECT_ID/$REPO_NAME:$BRANCH_NAME-$SHORT_SHA'
+# - name: 'gcr.io/cloud-builders/docker'
+#   id: Push
+#   args:
+#   - 'push'
+#   - 'gcr.io/$PROJECT_ID/$REPO_NAME:$BRANCH_NAME-$SHORT_SHA'
 
 # Deploy image to Cloud Run Google Cloud 
 - name: 'gcr.io/cloud-builders/gcloud'
