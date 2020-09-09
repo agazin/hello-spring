@@ -1,0 +1,41 @@
+#!/usr/bin/env yaml
+# -*- coding: utf-8 -*-
+# =============================================================================
+# Created By  : Peem Srinikorn
+# Created Date: Tue Sep  8 20:57:59 +07 2020
+# =============================================================================
+
+steps:
+# This step runs the unit tests on the app
+- name: gcr.io/cloud-builders/mvn:3.5.0-jdk-8
+  id: Build
+  args: ['clean', 'install', 'jib:build', '-Dimage=gcr.io/$PROJECT_ID/$REPO_NAME:$BRANCH_NAME-$SHORT_SHA']
+  volumes:
+  - name: m2
+    path: /root/.m2/
+
+# This step builds the container image.
+
+  
+# This step pushes the image to Container Registry
+
+- name: 'gcr.io/cloud-builders/docker'
+  id: Push
+  args:
+  - 'push'
+  - 'gcr.io/$PROJECT_ID/$REPO_NAME:$BRANCH_NAME-$SHORT_SHA'
+
+# Deploy image to Cloud Run Google Cloud 
+- name: 'gcr.io/cloud-builders/gcloud'
+  id : Deploy to Cloud Run
+  args:
+  - 'run'
+  - 'deploy'
+  - 'fastapi-movies'
+  - '--image'
+  - 'gcr.io/$PROJECT_ID/$REPO_NAME:$BRANCH_NAME-$SHORT_SHA'
+  - '--region'
+  - asia-southeast1 
+  - '--platform'
+  - 'managed'
+  - '--allow-unauthenticated'
