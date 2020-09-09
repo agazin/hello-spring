@@ -10,9 +10,6 @@ steps:
 - name: gcr.io/cloud-builders/mvn:3.5.0-jdk-8
   id: Build
   args: ['clean', 'install', 'jib:build', '-Dimage=gcr.io/$PROJECT_ID/$REPO_NAME:$BRANCH_NAME-$SHORT_SHA']
-  volumes:
-  - name: m2
-    path: /root/.m2/
 
 # This step builds the container image.
 
