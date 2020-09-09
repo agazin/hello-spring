@@ -49,7 +49,7 @@
 				<version>2.5.2</version>
 				<configuration>
 				<to>
-					<image>gcr.io/ateam-efiling/hello-world</image>
+					<image>gcr.io/ateam-efiling/hello-worldx</image>
 				</to>
 				</configuration>
 			</plugin>

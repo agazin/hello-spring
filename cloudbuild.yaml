@@ -6,12 +6,11 @@
 # =============================================================================
 
 steps:
-# This step runs the unit tests on the app
+# This step builds the container image.
 - name: gcr.io/cloud-builders/mvn:3.5.0-jdk-8
   id: Build
   args: ['clean', 'install', 'jib:build', '-Dimage=gcr.io/$PROJECT_ID/$REPO_NAME:$BRANCH_NAME-$SHORT_SHA']
 
-# This step builds the container image.
 
   
 # This step pushes the image to Container Registry
